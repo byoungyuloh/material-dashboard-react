@@ -34,6 +34,10 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+import {
+  Typography
+} from '@mui/material';
+import DataGridExample from "./DataGridExample";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
@@ -48,12 +52,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Bookings"
-                count={281}
+                title="Average survival rate for 1-day hospitalization"
+                count="40,420"
                 percentage={{
                   color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
+                  amount: "+100%",
+                  label: "at start day",
                 }}
               />
             </MDBox>
@@ -62,12 +66,12 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
+                title="Average survival rate for 30-day hospitalization"
+                count="28,294"
                 percentage={{
-                  color: "success",
-                  amount: "+3%",
-                  label: "than last month",
+                  color: "error",
+                  amount: "-30%",
+                  label: "than 1-day hosp",
                 }}
               />
             </MDBox>
@@ -77,12 +81,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Revenue"
-                count="34k"
+                title="Average survival rate for 50-day hospitalization"
+                count="24,332"
                 percentage={{
-                  color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
+                  color: "error",
+                  amount: "-14%",
+                  label: "than 30-day hosp",
                 }}
               />
             </MDBox>
@@ -92,70 +96,35 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Followers"
-                count="+91"
+                title="Average survival rate for 100-day hospitalization"
+                count="18735"
                 percentage={{
-                  color: "success",
-                  amount: "",
-                  label: "Just updated",
+                  color: "error",
+                  amount: "-23%",
+                  label: "than 50-day hosp",
                 }}
               />
             </MDBox>
           </Grid>
         </Grid>
-        <MDBox mt={4.5}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsBarChart
-                  color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
-                  chart={reportsBarChartData}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="success"
-                  title="daily sales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
-                  date="updated 4 min ago"
-                  chart={sales}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="completed tasks"
-                  description="Last Campaign Performance"
-                  date="just updated"
-                  chart={tasks}
-                />
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
         <MDBox>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={8}>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h2" sx={{mt:1, mb:2}}>Servival Rate Over days by Treatment</Typography>
               <Projects />
             </Grid>
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h2" sx={{mt:1, mb:2}}>Servival Rate Over days by Treatment</Typography>
               <OrdersOverview />
             </Grid>
           </Grid>
         </MDBox>
+        <MDBox mt={4.5}>
+            <Typography variant="h2" sx={{mt:1, mb:2}}>Treatment Path of Days</Typography>
+            <DataGridExample />
+        </MDBox>
       </MDBox>
-      <Footer />
+      {/* <Footer /> */}
     </DashboardLayout>
   );
 }
