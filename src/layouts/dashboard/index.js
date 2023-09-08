@@ -46,17 +46,18 @@ function Dashboard() {
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
+          <Typography variant="h2" sx={{mt:1, mb:2}}>Survival Rate By Length Of Hospital Stay</Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Average survival rate for 1-day hospitalization"
+                title="Number of surviving patients in the study population"
                 count="40,420"
                 percentage={{
                   color: "success",
-                  amount: "+100%",
+                  amount: "100%",
                   label: "at start day",
                 }}
               />
@@ -66,12 +67,12 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Average survival rate for 30-day hospitalization"
+                title="Number of surviving patients in the study population"
                 count="28,294"
                 percentage={{
                   color: "error",
-                  amount: "-30%",
-                  label: "than 1-day hosp",
+                  amount: "70%",
+                  label: "than 1day hosp -30%",
                 }}
               />
             </MDBox>
@@ -81,12 +82,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Average survival rate for 50-day hospitalization"
+                title="Number of surviving patients in the study population"
                 count="24,332"
                 percentage={{
                   color: "error",
-                  amount: "-14%",
-                  label: "than 30-day hosp",
+                  amount: "56%",
+                  label: "than 30day hosp -14%",
                 }}
               />
             </MDBox>
@@ -96,12 +97,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Average survival rate for 100-day hospitalization"
-                count="18735"
+                title="Number of surviving patients in the study population"
+                count="18,735"
                 percentage={{
                   color: "error",
-                  amount: "-23%",
-                  label: "than 50-day hosp",
+                  amount: "33%",
+                  label: "than 50day hosp -23%",
                 }}
               />
             </MDBox>
@@ -110,17 +111,17 @@ function Dashboard() {
         <MDBox>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
-              <Typography variant="h2" sx={{mt:1, mb:2}}>Servival Rate Over days by Treatment</Typography>
+              <Typography variant="h2" sx={{mt:3, mb:2}}>Servival Rate Over days by Treatment</Typography>
               <Projects />
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography variant="h2" sx={{mt:1, mb:2}}>Servival Rate Over days by Treatment</Typography>
+              <Typography variant="h2" sx={{mt:3, mb:2}}>Servival Rate Over days by Treatment</Typography>
               <OrdersOverview />
             </Grid>
           </Grid>
         </MDBox>
         <MDBox mt={4.5}>
-            <Typography variant="h2" sx={{mt:1, mb:2}}>Treatment Path of Days</Typography>
+            <Typography variant="h2" sx={{mt:3, mb:2}}>Treatment Path of Days</Typography>
             <DataGridExample />
         </MDBox>
       </MDBox>

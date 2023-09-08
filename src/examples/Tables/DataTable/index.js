@@ -184,7 +184,7 @@ function DataTable({
         </MDBox>
       ) : null}
       <Table {...getTableProps()}>
-        <MDBox component="thead">
+        {/* <MDBox component="thead">
           {headerGroups.map((headerGroup, key) => (
             <TableRow key={key} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, idx) => (
@@ -200,8 +200,8 @@ function DataTable({
               ))}
             </TableRow>
           ))}
-        </MDBox>
-        <TableBody {...getTableBodyProps()}>
+        </MDBox> */}
+        {/* <TableBody {...getTableBodyProps()}>
           {page.map((row, key) => {
             prepareRow(row);
             return (
@@ -219,7 +219,7 @@ function DataTable({
               </TableRow>
             );
           })}
-        </TableBody>
+        </TableBody> */}
       </Table>
 
       <MDBox

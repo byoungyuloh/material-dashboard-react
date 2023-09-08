@@ -54,8 +54,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
+import Bundle from './Bundle';
+import BundleTable from './BundleTable';
+import SourceOfInfection from './SourceOfInfection';
+import Screening from './Screening';
+import Severity from './Severity';
 
-function Dashboard() {
+function Score() {
   const { sales, tasks } = reportsLineChartData;
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -94,6 +99,10 @@ function Dashboard() {
     setOpen(false); // 모달 열기
   };
 
+  const handleBundleSelect = () => {
+    console.log('bundle select');
+  }
+
   const [showPredictionResults, setShowPredictionResults] = useState(false);
   
 
@@ -113,27 +122,26 @@ function Dashboard() {
         <MDBox>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Typography variant="h3" sx={{mt:1, mb:2}}>환자선택</Typography>
+              <Typography variant="h3" sx={{ mb:1}}>환자선택</Typography>
               <Divider sx={{ backgroundColor: 'black' }}/>
                 <ThemeProvider theme={theme}>
                     <Button variant="contained" onClick={handleOpen}>Select Patient</Button>
                 </ThemeProvider>
                 <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Patient List
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Please Select Patient
-                </Typography>
-                <DataTable selectRow={handleRowSelect}/>
-              </Box>
-            </Modal>
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Patient List
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 1 }}>
+                    </Typography>
+                    <DataTable selectRow={handleRowSelect}/>
+                </Box>
+                </Modal>
               {/* <Projects /> */}
             </Grid>
 
@@ -141,10 +149,11 @@ function Dashboard() {
               (<></>)
               :
               (
+                
                 <Grid item xs={12}>
                   <Typography variant="h3" sx={{mt:1, mb:2}}>환자 기본정보</Typography>
                     <Card>
-                        <Box sx={{ display: 'flex', alignItems: 'left', justifyContent: 'left', marginTop: 2, marginBottom: 2, marginLeft: 2, backgroundColor : '#ffffff' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'left', justifyContent: 'left', marginTop: 2, marginBottom: 2, marginLeft: 3, backgroundColor : '#ffffff' }}>
                             <TextField
                                 label="PatNo"
                                 value={selectedRow?.patno}
@@ -193,29 +202,88 @@ function Dashboard() {
             (<></>)
             :
             (
-              <Grid item xs={12}>
-                <Typography variant="h3" sx={{mt:1, mb:2}}>검사결과</Typography>
-                <Card>
-                    <Box sx={{ display: 'flex', alignItems: 'left', justifyContent: 'left', marginTop: 2, marginBottom: 2, marginLeft: 2  }}>
-                        <TextField sx={{width:'150px', margin: 1}}label="sbp" value={80} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="dbp" value={110} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="RR" value={68} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="BT" value={36.7} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="Cr" value={0.7} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="T.bil" value={1} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="ALT" value={45} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="AST" value={17} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="CK" value={157} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="INR" value={1.0} variant="outlined" InputProps={{ readOnly: true }} />
-                        <TextField sx={{width:'150px', margin: 1}}label="Na" value={140} variant="outlined" InputProps={{ readOnly: true }} />
-                    </Box>
-                  </Card>
-              </Grid>
+            //   <Grid item xs={12}>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={5}>
+                    <Typography variant="h3" sx={{mt:1, mb:2}}>감염의심</Typography>
+                        <Card>
+                            {/* <Bundle selectRow={handleBundleSelect}/> */}
+                            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: 2, marginBottom: 2, backgroundColor: '#ffffff' }}>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <TextField
+                                    label="체온"
+                                    value={'37.5'}
+                                    variant="outlined"
+                                    sx={{ margin: 1 }}
+                                    InputProps={{ readOnly: true }}
+                                    />
+                                    <TextField
+                                    label="WBC"
+                                    value={'5000 /mm3'}
+                                    variant="outlined"
+                                    sx={{ margin: 1 }}
+                                    InputProps={{ readOnly: true }}
+                                    />
+                                    <TextField
+                                    label="NEU"
+                                    value={'35%'}
+                                    variant="outlined"
+                                    sx={{ margin: 1 }}
+                                    InputProps={{ readOnly: true }}
+                                    />
+                                    <TextField
+                                    label="ETC"
+                                    value={'ETC'}
+                                    variant="outlined"
+                                    sx={{ margin: 1 }}
+                                    InputProps={{ readOnly: true }}
+                                    />
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <TextField
+                                    label="Culture"
+                                    value={'YES'}
+                                    variant="outlined"
+                                    sx={{ margin: 1 }}
+                                    InputProps={{ readOnly: true }}
+                                    />
+                                    <TextField
+                                    label="CRP"
+                                    value={'12 mg/L'}
+                                    variant="outlined"
+                                    sx={{ margin: 1 }}
+                                    InputProps={{ readOnly: true }}
+                                    />
+                                    <TextField
+                                    label="ANC"
+                                    value={'1750 /mm3'}
+                                    variant="outlined"
+                                    sx={{ margin: 1 }}
+                                    InputProps={{ readOnly: true }}
+                                    />
+                                    <TextField
+                                    label="EMPTY"
+                                    value={'EMP'}
+                                    variant="outlined"
+                                    sx={{ margin: 1 }}
+                                    InputProps={{ readOnly: true }}
+                                    />
+                                </Box>
+                                </Box>
+                        </Card>
+                        <Typography variant="h3" sx={{mt:2, mb:2}}>감염원</Typography>
+                        <Card>
+                            <SourceOfInfection />
+                        </Card>
+                </Grid>
+                <Grid item xs={12} md={7}>
+                    <Typography variant="h3" sx={{mt:1, mb:2}}>번들수행</Typography>
+                            <BundleTable />
+                </Grid>
+            </Grid>
             )
           }
-
         </MDBox>
-
 
         <MDBox mt={4.5}>
           {
@@ -223,14 +291,24 @@ function Dashboard() {
             (<></>)
             :
             (
-              <Grid item xs={12}>
-                <Typography variant="h3" sx={{mt:1, mb:2}}>최적치료경로 예측</Typography>
-                <Card>
-                <Box sx={{ display: 'flex', alignItems: 'left', justifyContent: 'left', marginBottom: 2, marginLeft:5  }}>
-                    <VerticalLinearStepper sx={{ marginLeft: '10px' }} onPredictionClick={handlePrediction} onResetClick={handleResetPrediction} />
-                </Box>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={5}>
+                <Typography variant="h3" sx={{mt:1, mb:2}}>지표점수 (Screening)</Typography>
+                <Card sx={{ height: '220px' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left', marginBottom: 1  }}>
+                        <Screening />
+                    </Box>
                 </Card>
               </Grid>
+              <Grid item xs={12} md={7}>
+                <Typography variant="h3" sx={{mt:1, mb:2}}>지표점수 (Serverity)</Typography>
+                <Card sx={{ height: '220px' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'left', justifyContent: 'left', marginBottom: 2  }}>
+                        <Severity />
+                    </Box>
+                </Card>
+              </Grid>
+            </Grid>
             )
           }
 
@@ -311,4 +389,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Score;

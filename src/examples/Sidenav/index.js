@@ -17,7 +17,7 @@ import { useEffect } from "react";
 
 // react-router-dom components
 import { useLocation, NavLink } from "react-router-dom";
-
+  
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
@@ -38,6 +38,7 @@ import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 // Custom styles for the Sidenav
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
+import drpath from "image/drPath_image.png";
 
 // Material Dashboard 2 React context
 import {
@@ -160,8 +161,12 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             <Icon sx={{ fontWeight: "bold" }}>close</Icon>
           </MDTypography>
         </MDBox>
-        <MDBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && <MDBox component="img" src={brand} alt="Brand" width="2rem" />}
+        <MDBox component={NavLink} to="/dashboard" display="flex" alignItems="center">
+          {brand &&
+          // <></>
+          <MDBox component="img" src={drpath} alt="Brand" width="10rem" />
+          // <MDBox component="img" src={brand} alt="Brand" width="2rem" />
+          }
           <MDBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}

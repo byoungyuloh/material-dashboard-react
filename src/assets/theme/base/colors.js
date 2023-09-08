@@ -107,9 +107,12 @@ const colors = {
       state: "#495361",
     },
 
+    // stepper색깔
     info: {
       main: "#49a3f1",
       state: "#1A73E8",
+    //   main: "#000000",
+    // focus: "#ffffff",
     },
 
     success: {

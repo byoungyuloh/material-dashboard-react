@@ -45,14 +45,21 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import SamplePage from "layouts/extra-pages/SamplePage";
+import Scoring from "layouts/extra-pages/Scoring";
+import PageviewIcon from '@mui/icons-material/Pageview';
+import ScoreIcon from '@mui/icons-material/Score';
 
 // @mui icons
 import Icon from "@mui/material/Icon";
 
 const routes = [
   {
+    route: "/signin",
+    component: <SignIn />,
+  },
+  {
     route: "/",
-    component: <Dashboard />,
+    component: <SignIn />,
   },
   {
     type: "collapse",
@@ -67,11 +74,20 @@ const routes = [
   {
     type: "collapse",
     name: "치료경로 예측",
-    key: "sign-in",
-    icon: <Icon fontSize="small">login</Icon>,
-    route: "/authentication/sign-in",
+    key: "prediction",
+    icon: <PageviewIcon fontSize="small">login</PageviewIcon>,
+    route: "/TreatmentPath/Prediction/",
     component: <SamplePage />,
     // component 복사하고 이식할것
+  },
+
+  {
+    type: "collapse",
+    name: "지표별 스코어링",
+    key: "scores",
+    icon: <ScoreIcon fontSize="small">login</ScoreIcon>,
+    route: "/TreatmentPath/Score/",
+    component: <Scoring />,
   },
 
   // {

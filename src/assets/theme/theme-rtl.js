@@ -125,7 +125,7 @@ export default createTheme({
     MuiDivider: { ...divider },
     MuiTableContainer: { ...tableContainer },
     MuiTableHead: { ...tableHead },
-    MuiTableCell: { ...tableCell },
+    // MuiTableCell: { ...tableCell },
     MuiLinearProgress: { ...linearProgress },
     MuiBreadcrumbs: { ...breadcrumbs },
     MuiSlider: { ...slider },

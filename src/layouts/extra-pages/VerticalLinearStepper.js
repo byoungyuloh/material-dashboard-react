@@ -8,6 +8,20 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import ColorToggleButton from './ColorToggleButton';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          // backgroundColor: '#ffffff',
+          // color: '#000000',
+        },
+      },
+    },
+  },
+});
 
 const steps = [
   {
@@ -27,34 +41,9 @@ const steps = [
   },
 ];
 
-const verticalStepperStyle = {
-    maxWidth: 500,
-    mt: 2,
-    mr: 10,
-  };
-  
-//   const stepLabelStyle = {
-//     '& .MuiStepLabel-label': {
-//       color: 'inherit', // Use the default text color
-//       background: 'none'
-//     },
-//   };
-
-  const stepLabelStyle = {
-    '& .MuiStepLabel-label': {
-      color: '#000000', // Text color
-      backgroudColor: '#ffffff',
-    //   background: '#000000', // Background color
-      backgroundClip: 'content-box', // Prevent background from covering the connector line
-      padding: '8px 16px', // Adjust padding as needed
-      fontWeight: 'bold', // Adjust font weight as needed
-      borderRadius: '8px', // Add rounded corners
-    },
-  };
-
 const VerticalLinearStepper = ({ onPredictionClick, onResetClick }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [selectedValues, setSelectedValues] = useState([]);
+  const [selectedValues, setSelectedValues] = useState(Array(steps.length).fill('')); // 초기값 설정
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -66,13 +55,13 @@ const VerticalLinearStepper = ({ onPredictionClick, onResetClick }) => {
 
   const handleReset = () => {
     setActiveStep(0);
-    setSelectedValues([]);
-    onResetClick(); // Call the reset function from the parent component
+    setSelectedValues(Array(steps.length).fill('')); // 리셋시 초기값으로 설정
+    onResetClick();
   };
 
   const handlePrediction = () => {
     console.log('예측버튼');
-    onPredictionClick(); // Notify parent component about the prediction button click
+    onPredictionClick();
   };
 
   const handleValueChange = (index, newValues) => {
@@ -83,9 +72,13 @@ const VerticalLinearStepper = ({ onPredictionClick, onResetClick }) => {
     });
   };
 
+  const isStepComplete = (step) => {
+    return selectedValues[steps.indexOf(step)] !== '';
+  };
+
   return (
-    <Box sx={verticalStepperStyle}>
-      <Stepper activeStep={activeStep} orientation="vertical" sx={stepLabelStyle}>
+    <Box sx={{ maxWidth: 500 }}>
+      <Stepper activeStep={activeStep} orientation="vertical" sx={{ mt: 2, mr: 10 }}>
         {steps.map((step, index) => (
           <Step key={step.label}>
             <StepLabel>
@@ -99,42 +92,45 @@ const VerticalLinearStepper = ({ onPredictionClick, onResetClick }) => {
               />
               <Box sx={{ mb: 2 }}>
                 <div>
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 3, mr: 1 }}
-                  >
-                    {index === steps.length - 1 ? '예측' : 'Continue'}
-                  </Button>
-                  <Button
-                    disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
+                  <ThemeProvider theme={theme}>
+                    <Button
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 3, mr: 1 }}
+                      disabled={!isStepComplete(step)} // 선택되지 않았을 때 비활성화
+                    >
+                      {index === steps.length - 1 ? '예측' : 'Continue'}
+                    </Button>
+                    <Button
+                      variant="contained"
+                      disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 3, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                  </ThemeProvider>
                 </div>
               </Box>
-              
             </StepContent>
           </Step>
         ))}
       </Stepper>
       {activeStep === steps.length && (
         <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>모든 치료경로를 선택하셨습니다.</Typography>
-          <Typography>다시 선택하거나 예측 할 수 있습니다.</Typography>
-          <Button onClick={handlePrediction} sx={{ mt: 1, mr: 1 }}>
-            예측
-          </Button>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Reset
-          </Button>
+          <Typography variant="h6">모든 치료경로를 선택하셨습니다.</Typography>
+          <Typography variant="h6">다시 선택하거나 예측 할 수 있습니다.</Typography>
+          <ThemeProvider theme={theme}>
+            <Button variant="contained" onClick={handlePrediction} sx={{ mt: 1, mr: 1 }}>
+              예측
+            </Button>
+            <Button variant="contained" onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+              Reset
+            </Button>
+          </ThemeProvider>
         </Paper>
       )}
-      
     </Box>
-    
   );
 };
 

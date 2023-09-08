@@ -23,15 +23,15 @@ const { borderWidth } = borders;
 const stepConnector = {
   styleOverrides: {
     root: {
-      color: "#9fc9ff",
+      // color: "#9fc9ff",
       transition: "all 200ms linear",
 
       "&.Mui-active": {
-        color: white.main,
+        // color: white.main,
       },
 
       "&.Mui-completed": {
-        color: white.main,
+        // color: white.main,
       },
     },
 
@@ -44,7 +44,7 @@ const stepConnector = {
     line: {
       borderWidth: `${borderWidth[2]} !important`,
       borderColor: "currentColor",
-      opacity: 0.5,
+      // opacity: 0.5,
     },
   },
 };

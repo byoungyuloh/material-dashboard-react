@@ -82,6 +82,21 @@ const ColorToggleButton = ({ index, selectedValues, onValueChange }) => {
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>
+      <Typography variant="h6" sx={{ mt: 2 }}>
+        미조치
+      </Typography>
+      <Box display="flex" flexDirection="row" marginTop={1}>
+        <ToggleButtonGroup
+          value={alignment}
+          onChange={handleChange}
+          exclusive
+          aria-label={`Treatment-${index}`}
+        >
+          <ToggleButton value="미조치" name={`treatment-${index}`} size="small">
+          미조치
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </Box>
     </Box>
   );
 };

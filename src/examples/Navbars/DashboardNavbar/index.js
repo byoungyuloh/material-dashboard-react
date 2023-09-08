@@ -52,6 +52,8 @@ import {
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
@@ -123,6 +125,19 @@ function DashboardNavbar({ absolute, light, isMini }) {
     },
   });
 
+  const theme = createTheme({
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            // backgroundColor: '#ffffff', // 버튼 배경색을 하얗게 설정
+            // color: '#000000', // 버튼 텍스트색을 검은색으로 설정
+          },
+        },
+      },
+    },
+  });
+
   return (
     <AppBar
       position={absolute ? "absolute" : navbarType}
@@ -136,15 +151,18 @@ function DashboardNavbar({ absolute, light, isMini }) {
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
             <MDBox pr={1}>
-              <MDInput label="Search here" />
+              <MDInput label="Input patno" />
             </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
               <Link to="/authentication/sign-in/basic">
-                <IconButton sx={navbarIconButton} size="small" disableRipple>
+                {/* <IconButton sx={navbarIconButton} size="small" disableRipple>
                   <Icon sx={iconsStyle}>account_circle</Icon>
-                </IconButton>
+                </IconButton> */}
               </Link>
-              <IconButton
+              <ThemeProvider theme={theme}>
+                    <Button variant="contained" >Search patient</Button>
+                </ThemeProvider>
+              {/* <IconButton
                 size="small"
                 disableRipple
                 color="inherit"
@@ -175,7 +193,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 onClick={handleOpenMenu}
               >
                 <Icon sx={iconsStyle}>notifications</Icon>
-              </IconButton>
+              </IconButton> */}
               {renderMenu()}
             </MDBox>
           </MDBox>
